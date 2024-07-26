@@ -1,7 +1,6 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { Flex, Heading, SimpleGrid, Text } from "@chakra-ui/react";
 import Image from "next/image";
-import graphic from "@/../public/undraw_link_shortener_mvf6.svg";
-import AnimatedText from "@/components/home/AnimatedText";
+import graphic from "@/../public/undraw_access_denied_re_awnf.svg";
 
 export default function Home() {
   return (
@@ -19,9 +18,12 @@ export default function Home() {
         style={{
           maxWidth: "85vw",
         }}
-        alt="Link shortener graphic"
+        alt="Not found graphic"
       />
-      <AnimatedText />
+      <Flex direction="column" gap={4}>
+        <Heading>Not found!</Heading>
+        <Text>The link you are trying to access does not exist!</Text>
+      </Flex>
     </SimpleGrid>
   );
 }

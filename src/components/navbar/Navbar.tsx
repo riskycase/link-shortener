@@ -1,0 +1,28 @@
+import { Box, Flex, Link, Text, theme } from "@chakra-ui/react";
+import NextLink from "next/link";
+import LoginButton from "./LoginButton";
+
+export default function Navbar() {
+  return (
+    <header className="w-full sticky top-0 z-10">
+      <Box
+        width="100%"
+        padding={4}
+        backgroundColor={theme.colors.gray[700]}
+        color={theme.colors.gray[50]}
+      >
+        <Flex
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          gap={2}
+        >
+          <Link as={NextLink} href="/">
+            <Text fontWeight="bold">Home</Text>
+          </Link>
+          <LoginButton />
+        </Flex>
+      </Box>
+    </header>
+  );
+}
