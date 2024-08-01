@@ -1,7 +1,7 @@
-import { Box, Flex, Text, theme } from "@chakra-ui/react";
+import { Box, Flex, Link, Text, theme } from "@chakra-ui/react";
 import LoginButton from "./LoginButton";
 import { getUser } from "@/actions";
-import { Link } from "@chakra-ui/next-js";
+import NextLink from "next/link";
 
 export default async function Navbar() {
   const user = await getUser();
@@ -19,7 +19,7 @@ export default async function Navbar() {
           justifyContent="space-between"
           gap={2}
         >
-          <Link href="/">
+          <Link as={NextLink} href="/">
             <Text fontWeight="bold">Home</Text>
           </Link>
           <LoginButton user={user} />

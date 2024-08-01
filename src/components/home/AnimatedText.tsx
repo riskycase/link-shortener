@@ -1,9 +1,9 @@
 "use client";
 
-import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Flex, Heading, Link, Text } from "@chakra-ui/react";
 import TextTransition, { presets } from "react-text-transition";
 import { useEffect, useState } from "react";
-import { Link } from "@chakra-ui/next-js";
+import NextLink from "next/link";
 
 export default function AnimatedText() {
   const linkData = [
@@ -40,7 +40,7 @@ export default function AnimatedText() {
         Link shortener
       </Heading>
       <Text>Shorten long, boring, old links like</Text>
-      <Link href={linkData[index].longLink}>
+      <Link as={NextLink} href={linkData[index].longLink}>
         <TextTransition springConfig={presets.wobbly}>
           <Text as="p" noOfLines={1}>
             {linkData[index].longLink}
@@ -48,7 +48,10 @@ export default function AnimatedText() {
         </TextTransition>
       </Link>
       <Text>to short links as</Text>
-      <Link href={`https://riskycase.in/${linkData[index].shortCode}`}>
+      <Link
+        as={NextLink}
+        href={`https://riskycase.in/${linkData[index].shortCode}`}
+      >
         <Flex>
           <Text>riskycase.in/</Text>
           <TextTransition springConfig={presets.wobbly}>
