@@ -7,13 +7,12 @@ import {
   ButtonGroup,
   Divider,
   Flex,
-  Link,
   Text,
   useToast,
 } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { deleteLink } from "@/actions";
 import { redirect } from "next/navigation";
+import { Link } from "@chakra-ui/next-js";
 
 export default function LinkDetails({
   link,
@@ -44,14 +43,14 @@ export default function LinkDetails({
         gap={2}
       >
         <Flex direction="column" gap={2}>
-          <Link as={NextLink} href={`https://riskycase.in/${link.shortCode}`}>
+          <Link href={`https://riskycase.in/${link.shortCode}`}>
             <Text fontSize="large">riskycase.in/{link.shortCode}</Text>
             <Text>{link.longLink}</Text>
           </Link>
           <Text>Clicks: {link.redirectCount}</Text>
         </Flex>
         <ButtonGroup isDisabled={link.disabled}>
-          <Button as={NextLink} href={`/dashboard/edit/${link.shortCode}`}>
+          <Button as={Link} href={`/dashboard/edit/${link.shortCode}`}>
             Edit
           </Button>
           <Button
