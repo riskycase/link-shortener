@@ -1,9 +1,9 @@
 "use client";
 
-import { Flex, Heading, Link, Text } from "@chakra-ui/react";
-import NextLink from "next/link";
+import { Flex, Heading, Text } from "@chakra-ui/react";
 import TextTransition, { presets } from "react-text-transition";
 import { useEffect, useState } from "react";
+import { Link } from "@chakra-ui/next-js";
 
 export default function AnimatedText() {
   const linkData = [
@@ -24,7 +24,7 @@ export default function AnimatedText() {
   useEffect(() => {
     const intervalId = setInterval(
       () => setIndex((index) => (index + 1) % linkData.length),
-      5000 // every 3 seconds
+      5000 // every 5 seconds
     );
     return () => clearTimeout(intervalId);
   }, []);
@@ -40,22 +40,19 @@ export default function AnimatedText() {
         Link shortener
       </Heading>
       <Text>Shorten long, boring, old links like</Text>
-      <Text noOfLines={1}>
-        <Link as={NextLink} href={linkData[index].longLink}>
-          <TextTransition springConfig={presets.wobbly}>
+      <Link href={linkData[index].longLink}>
+        <TextTransition springConfig={presets.wobbly}>
+          <Text as="p" noOfLines={1}>
             {linkData[index].longLink}
-          </TextTransition>
-        </Link>
-      </Text>
+          </Text>
+        </TextTransition>
+      </Link>
       <Text>to short links as</Text>
-      <Link
-        as={NextLink}
-        href={`https://riskycase.in/${linkData[index].shortCode}`}
-      >
+      <Link href={`https://riskycase.in/${linkData[index].shortCode}`}>
         <Flex>
           <Text>riskycase.in/</Text>
           <TextTransition springConfig={presets.wobbly}>
-            {linkData[index].shortCode}
+            <Text as="span">{linkData[index].shortCode}</Text>
           </TextTransition>
         </Flex>
       </Link>
