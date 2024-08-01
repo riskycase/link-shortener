@@ -1,8 +1,10 @@
 import { Box, Flex, Link, Text, theme } from "@chakra-ui/react";
 import NextLink from "next/link";
 import LoginButton from "./LoginButton";
+import { getUser } from "@/actions";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const user = await getUser();
   return (
     <header className="w-full sticky top-0 z-10">
       <Box
@@ -20,7 +22,7 @@ export default function Navbar() {
           <Link as={NextLink} href="/">
             <Text fontWeight="bold">Home</Text>
           </Link>
-          <LoginButton />
+          <LoginButton user={user} />
         </Flex>
       </Box>
     </header>

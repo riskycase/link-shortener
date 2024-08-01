@@ -9,17 +9,23 @@ import {
   Link,
   Menu,
   MenuButton,
+  MenuDivider,
   MenuItem,
   MenuList,
   Spinner,
   theme,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import NextLink from "next/link";
 import { FaSignOutAlt } from "react-icons/fa";
 import { FaGoogle } from "react-icons/fa6";
+import { User } from "@prisma/client";
+import {
+  MdAdminPanelSettings,
+  MdArrowDropDown,
+  MdDashboard,
+} from "react-icons/md";
 
-export default function Login() {
+export default function Login({ user }: { user: User | null }) {
   const session = useSession();
   const [loading, setLoading] = useState(false);
   if (session.status === "loading") {
@@ -40,17 +46,29 @@ export default function Login() {
   } else if (session.status === "authenticated" && session.data.user) {
     return (
       <Flex direction="row" alignItems="center" gap={2}>
-        <Link as={NextLink} href="/dashboard">
-          DASHBOARD
-        </Link>
         <Menu>
-          <MenuButton
-            as={Avatar}
-            name={session.data.user.name!}
-            src={session.data.user.image!}
-            size="sm"
-          />
+          <MenuButton>
+            <Flex direction="row" alignItems="center" gap={2}>
+              <Avatar
+                name={session.data.user.name!}
+                src={session.data.user.image!}
+                size="sm"
+              />
+              <MdArrowDropDown />
+            </Flex>
+          </MenuButton>
           <MenuList textColor={theme.colors.gray[700]}>
+            <MenuItem icon={<MdDashboard />}>
+              <Link href={"/dashboard"}>Dashboard</Link>
+            </MenuItem>
+            {user?.level === "ADMIN" && (
+              <>
+                <MenuItem icon={<MdAdminPanelSettings />}>
+                  <Link href={"/admin/dashboard"}>Admin Dashboard</Link>
+                </MenuItem>
+                <MenuDivider />
+              </>
+            )}
             <MenuItem
               onClick={() => {
                 signOut();

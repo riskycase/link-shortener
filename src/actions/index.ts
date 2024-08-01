@@ -9,5 +9,6 @@ export {
   getLink,
   getUserLinks,
   deleteLink,
-  useLink
+  useLink,
 } from "./link";
+export { getAllUsers, editUser, getAllLinks, getAllReports } from "./admin";
