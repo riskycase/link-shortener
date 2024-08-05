@@ -2,6 +2,8 @@
   "name": "riskycase-shortener",
   "version": "0.1.0",
   "private": true,
+  "license": "GPL-3.0-only",
+  "author": "Hrishikesh Patil <hrishikeshpatil.754@gmail.com> (https://riskycase.in)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

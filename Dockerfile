@@ -1,5 +1,9 @@
 FROM node:20-alpine AS base
 
+LABEL org.opencontainers.image.source=https://github.com/riskycase/link-shortener
+LABEL org.opencontainers.image.description="Link shortener implemented for riskycase.in"
+LABEL org.opencontainers.image.licenses=GPL-3.0-only
+
 # Install dependencies only when needed
 FROM base AS deps
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
