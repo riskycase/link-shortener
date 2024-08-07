@@ -20,8 +20,24 @@ export async function editUser(id: string, linkLimit: number) {
 export async function getAllLinks() {
   return db.link.findMany({
     include: {
+      User: true,
       Report: true,
     },
+  });
+}
+
+export async function modifyLink(
+  shortCode: string,
+  disabledMessage: string,
+  disabled: boolean
+) {
+  const link = await db.link.findFirst({
+    where: { id: shortCode.toLowerCase() },
+  });
+  if (!link) return {};
+  return await db.link.update({
+    where: { id: shortCode.toLowerCase() },
+    data: { disabled, disabledMessage },
   });
 }
 

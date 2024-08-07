@@ -27,7 +27,7 @@ export default function AnimatedText() {
       5000 // every 5 seconds
     );
     return () => clearTimeout(intervalId);
-  }, []);
+  }, [linkData.length]);
   return (
     <Flex
       padding={4}

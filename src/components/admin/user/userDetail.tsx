@@ -50,7 +50,14 @@ export default function UserDetail({
         </Button>
       </Flex>
       <Divider />
-      <Modal isOpen={isOpen} isCentered onClose={closeModal}>
+      <Modal
+        isOpen={isOpen}
+        isCentered
+        onClose={() => {
+          setLimit(user.linkLimit);
+          closeModal();
+        }}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{user.name}</ModalHeader>

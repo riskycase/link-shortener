@@ -6,7 +6,6 @@ import {
   Avatar,
   Button,
   Flex,
-  Link,
   Menu,
   MenuButton,
   MenuDivider,
@@ -24,6 +23,7 @@ import {
   MdArrowDropDown,
   MdDashboard,
 } from "react-icons/md";
+import NextLink from "next/link";
 
 export default function Login({ user }: { user: User | null }) {
   const session = useSession();
@@ -58,13 +58,17 @@ export default function Login({ user }: { user: User | null }) {
             </Flex>
           </MenuButton>
           <MenuList textColor={theme.colors.gray[700]}>
-            <MenuItem icon={<MdDashboard />}>
-              <Link href={"/dashboard"}>Dashboard</Link>
+            <MenuItem icon={<MdDashboard />} href={"/dashboard"} as={NextLink}>
+              Dashboard
             </MenuItem>
             {user?.level === "ADMIN" && (
               <>
-                <MenuItem icon={<MdAdminPanelSettings />}>
-                  <Link href={"/admin/dashboard"}>Admin Dashboard</Link>
+                <MenuItem
+                  icon={<MdAdminPanelSettings />}
+                  href={"/admin/dashboard"}
+                  as={NextLink}
+                >
+                  Admin Dashboard
                 </MenuItem>
                 <MenuDivider />
               </>

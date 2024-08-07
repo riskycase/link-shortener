@@ -1,5 +1,6 @@
 import { getAllLinks, getAllReports, getAllUsers, getUser } from "@/actions";
-import UserList from "@/components/admin/userList";
+import LinkList from "@/components/admin/link/linkList";
+import UserList from "@/components/admin/user/userList";
 import {
   Badge,
   Flex,
@@ -44,6 +45,9 @@ export default async function AdminDashboard() {
         <TabPanels>
           <TabPanel>
             <UserList users={users} />
+          </TabPanel>
+          <TabPanel>
+            <LinkList links={links} />
           </TabPanel>
         </TabPanels>
       </Tabs>
