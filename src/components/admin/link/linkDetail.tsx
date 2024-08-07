@@ -46,29 +46,42 @@ export default function LinkDetail({
             Disabled: {link.disabledMessage}
           </Alert>
         )}
-        <Flex direction="row" gap={2}>
-          <Avatar src={`${new URL(link.longLink).origin}/favicon.ico`}>
-            <AvatarBadge
-              background={theme.colors.gray[700]}
-              borderColor={theme.colors.gray[700]}
-              fontSize="0.85rem"
-              paddingX="0.125rem"
-            >
-              {link.redirectCount}
-            </AvatarBadge>
-          </Avatar>
-          <Flex direction="column" flex={1}>
-            <LinkComponent
-              as={NextLink}
-              href={`riskycase.in/${link.shortCode}`}
-            >
-              <Text fontSize="large">{link.shortCode}</Text>
-            </LinkComponent>
-            <Text fontSize="small">{link.longLink}</Text>
-            <Text fontSize="small">Belongs to: {link.User.email}</Text>
+        <Flex
+          direction={{
+            base: "column",
+            lg: "row",
+          }}
+          alignItems="start"
+          justifyContent="space-between"
+          width="100%"
+          gap={2}
+        >
+          <Flex direction="row" gap={2}>
+            <Avatar src={`${new URL(link.longLink).origin}/favicon.ico`}>
+              <AvatarBadge
+                background={theme.colors.gray[700]}
+                borderColor={theme.colors.gray[700]}
+                fontSize="0.85rem"
+                paddingX="0.125rem"
+              >
+                {link.redirectCount}
+              </AvatarBadge>
+            </Avatar>
+            <Flex direction="column" flex={1}>
+              <LinkComponent
+                as={NextLink}
+                href={`riskycase.in/${link.shortCode}`}
+              >
+                <Text fontSize="large">{link.shortCode}</Text>
+              </LinkComponent>
+              <Text fontSize="small" wordBreak="break-all">
+                {link.longLink}
+              </Text>
+              <Text fontSize="small">Belongs to: {link.User.name}</Text>
+            </Flex>
           </Flex>
-          <Button variant="text" onClick={openModal}>
-            {isDisabled ? "ENABLE" : "DISABLE"}
+          <Button onClick={openModal}>
+            {isDisabled ? "Enable" : "Disable"}
           </Button>
         </Flex>
       </Flex>

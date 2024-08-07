@@ -46,7 +46,7 @@ export default function LinkDetails({
         <Flex direction="column" gap={2}>
           <Link as={NextLink} href={`https://riskycase.in/${link.shortCode}`}>
             <Text fontSize="large">riskycase.in/{link.shortCode}</Text>
-            <Text>{link.longLink}</Text>
+            <Text wordBreak="break-all">{link.longLink}</Text>
           </Link>
           <Text>Clicks: {link.redirectCount}</Text>
         </Flex>
