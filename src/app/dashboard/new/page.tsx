@@ -22,7 +22,7 @@ export default function NewLink() {
     FormData
   >(createLink, {});
   return (
-    <form action={action} style={{ width: "100%" }}>
+    <form action={action} style={{ width: "100%", flex: 1 }}>
       <Flex
         direction="column"
         alignItems="start"

@@ -14,7 +14,7 @@ import { FaPlus } from "react-icons/fa";
 export default async function Dashboard() {
   const [user, links] = await Promise.all([getUser(), getUserLinks()]);
   return user ? (
-    <Flex direction="column" padding={4} width="100%" gap={4}>
+    <Flex direction="column" padding={4} width="100%" gap={4} flex={1}>
       <Flex direction="row" justifyContent="space-between" alignItems="center">
         <Heading>Dashboard</Heading>
         <Button

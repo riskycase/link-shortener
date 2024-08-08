@@ -25,7 +25,7 @@ export default function EditLink({ link }: { link: ShortLink }) {
     FormData
   >(editLink, {});
   return (
-    <form action={action} style={{ width: "100%" }}>
+    <form action={action} style={{ width: "100%", flex: 1 }}>
       <Flex
         direction="column"
         alignItems="start"

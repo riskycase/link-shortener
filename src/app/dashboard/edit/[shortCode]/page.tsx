@@ -11,7 +11,7 @@ export default async function EditLinkPage({
   return link && user && link.userId === user.id ? (
     <EditLink link={link} />
   ) : (
-    <Flex direction="column" padding={4} width="100%" gap={4}>
+    <Flex direction="column" padding={4} width="100%" gap={4} flex={1}>
       <Heading>Dashboard</Heading>
       <Text>You must be signed in to shorten links!</Text>
     </Flex>

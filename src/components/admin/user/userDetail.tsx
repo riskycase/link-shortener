@@ -25,6 +25,8 @@ import {
 } from "@chakra-ui/react";
 import { Link, User } from "@prisma/client";
 import { useState } from "react";
+import { MdArrowDropDown, MdArrowDropUp } from "react-icons/md";
+import LinkDetail from "./linkDetail";
 
 export default function UserDetail({
   user,
@@ -33,6 +35,7 @@ export default function UserDetail({
 }) {
   const { isOpen, onOpen: openModal, onClose: closeModal } = useDisclosure();
   const [isLoading, setLoading] = useState(false);
+  const [showLinks, setShowLinks] = useState(false);
   const [limit, setLimit] = useState(user.linkLimit);
   return (
     <>
@@ -49,6 +52,25 @@ export default function UserDetail({
           EDIT
         </Button>
       </Flex>
+      {user.Links.length !== 0 && (
+        <>
+          <Button
+            variant="text"
+            alignSelf="start"
+            rightIcon={showLinks ? <MdArrowDropUp /> : <MdArrowDropDown />}
+            onClick={() => setShowLinks(!showLinks)}
+          >
+            {showLinks ? "HIDE" : "SHOW"} LINKS
+          </Button>
+          {showLinks && (
+            <Flex direction="column" gap={4}>
+              {user.Links.map((link, index) => (
+                <LinkDetail link={link} key={index} />
+              ))}
+            </Flex>
+          )}
+        </>
+      )}
       <Divider />
       <Modal
         isOpen={isOpen}
