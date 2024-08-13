@@ -1,10 +1,12 @@
 "use client";
 
 import { modifyLink } from "@/actions";
+import { baseUrl } from "@/url";
 import {
   Alert,
   Avatar,
   AvatarBadge,
+  Badge,
   Button,
   Divider,
   Flex,
@@ -28,6 +30,7 @@ import {
 import { Link, Report, User } from "@prisma/client";
 import NextLink from "next/link";
 import { useState } from "react";
+import { MdArrowDropUp, MdArrowDropDown } from "react-icons/md";
 
 export default function LinkDetail({
   link,
@@ -36,6 +39,7 @@ export default function LinkDetail({
 }) {
   const { isOpen, onOpen: openModal, onClose: closeModal } = useDisclosure();
   const [isLoading, setLoading] = useState(false);
+  const [showReports, setShowReports] = useState(false);
   const [isDisabled, setDisabled] = useState(link.disabled);
   const [message, setMessage] = useState(link.disabledMessage || "");
   return (
@@ -70,7 +74,7 @@ export default function LinkDetail({
             <Flex direction="column" flex={1}>
               <LinkComponent
                 as={NextLink}
-                href={`riskycase.in/${link.shortCode}`}
+                href={`${baseUrl.origin}/${link.shortCode}`}
               >
                 <Text fontSize="large">{link.shortCode}</Text>
               </LinkComponent>
@@ -84,6 +88,84 @@ export default function LinkDetail({
             {isDisabled ? "Enable" : "Disable"}
           </Button>
         </Flex>
+        {link.Report.length > 0 && (
+          <>
+            <Flex alignItems="center" gap={2}>
+              <Button
+                variant="text"
+                alignSelf="start"
+                rightIcon={
+                  showReports ? <MdArrowDropUp /> : <MdArrowDropDown />
+                }
+                onClick={() => setShowReports(!showReports)}
+              >
+                {showReports ? "HIDE" : "SHOW"} REPORTS
+              </Button>
+              <Badge>{link.Report.length}</Badge>
+            </Flex>
+            {showReports && (
+              <Flex direction="column" gap={4} padding={2}>
+                {link.Report.filter((report) => report.type === "SPAM").length >
+                  0 && (
+                  <Flex alignItems="center" gap={2}>
+                    <Text>Spam reports</Text>
+                    <Badge>
+                      {
+                        link.Report.filter((report) => report.type === "SPAM")
+                          .length
+                      }
+                    </Badge>
+                  </Flex>
+                )}
+                {link.Report.filter((report) => report.type === "NSFW").length >
+                  0 && (
+                  <Flex alignItems="center" gap={2}>
+                    <Text>NSFW reports</Text>
+                    <Badge>
+                      {
+                        link.Report.filter((report) => report.type === "NSFW")
+                          .length
+                      }
+                    </Badge>
+                  </Flex>
+                )}
+                {link.Report.filter((report) => report.type === "MISLEADING")
+                  .length > 0 && (
+                  <Flex alignItems="center" gap={2}>
+                    <Text>Misleading target reports</Text>
+                    <Badge>
+                      {
+                        link.Report.filter(
+                          (report) => report.type === "MISLEADING"
+                        ).length
+                      }
+                    </Badge>
+                  </Flex>
+                )}
+                {link.Report.filter((report) => report.type === "OTHER")
+                  .length > 0 && (
+                  <Flex alignItems="start" direction="column" gap={2}>
+                    <Flex alignItems="center" gap={2}>
+                      <Text>Other reports</Text>
+                      <Badge>
+                        {
+                          link.Report.filter(
+                            (report) => report.type === "OTHER"
+                          ).length
+                        }
+                      </Badge>
+                    </Flex>
+                    {link.Report.filter(
+                      (report) => report.type === "OTHER"
+                    ).map((report, index) => (
+                      <Text key={index}>{report.desc}</Text>
+                    ))}
+                  </Flex>
+                )}
+              </Flex>
+            )}
+          </>
+        )}
       </Flex>
       <Divider />
       <Modal

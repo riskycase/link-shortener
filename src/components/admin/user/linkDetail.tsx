@@ -1,6 +1,7 @@
 "use client";
 
 import { modifyLink } from "@/actions";
+import { baseUrl } from "@/url";
 import {
   Alert,
   Avatar,
@@ -66,7 +67,7 @@ export default function LinkDetail({ link }: { link: Link }) {
             <Flex direction="column" flex={1}>
               <LinkComponent
                 as={NextLink}
-                href={`riskycase.in/${link.shortCode}`}
+                href={`${baseUrl.origin}/${link.shortCode}`}
               >
                 <Text fontSize="large">{link.shortCode}</Text>
               </LinkComponent>

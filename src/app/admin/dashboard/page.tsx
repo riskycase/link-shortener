@@ -1,4 +1,4 @@
-import { getAllLinks, getAllReports, getAllUsers, getUser } from "@/actions";
+import { getAllLinks, getAllUsers, getUser } from "@/actions";
 import LinkList from "@/components/admin/link/linkList";
 import UserList from "@/components/admin/user/userList";
 import {
@@ -19,11 +19,7 @@ export default async function AdminDashboard() {
   if (user?.level !== "ADMIN") {
     redirect("/");
   }
-  const [users, links, reports] = await Promise.all([
-    getAllUsers(),
-    getAllLinks(),
-    getAllReports(),
-  ]);
+  const [users, links] = await Promise.all([getAllUsers(), getAllLinks()]);
   return (
     <Flex direction="column" padding={4} gap={4} flex={1}>
       <Heading>Admin Dashboard</Heading>
@@ -36,10 +32,6 @@ export default async function AdminDashboard() {
           <Tab>
             <Text marginX={2}>Links</Text>
             <Badge>{links.length}</Badge>
-          </Tab>
-          <Tab>
-            <Text marginX={2}>Reports</Text>
-            <Badge>{reports.length}</Badge>
           </Tab>
         </TabList>
         <TabPanels>

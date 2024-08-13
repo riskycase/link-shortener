@@ -1,6 +1,7 @@
 "use client";
 
 import { editLink } from "@/actions";
+import { baseUrl } from "@/url";
 import {
   Flex,
   Heading,
@@ -52,7 +53,7 @@ export default function EditLink({ link }: { link: ShortLink }) {
         >
           <FormControl isInvalid={Array.isArray(formState.shortCode)}>
             <InputGroup variant="flushed">
-              <InputLeftAddon>riskycase.in/</InputLeftAddon>
+              <InputLeftAddon>{baseUrl.hostname}/</InputLeftAddon>
               <Input name="shortCode" value={link.shortCode} readOnly />
             </InputGroup>
           </FormControl>

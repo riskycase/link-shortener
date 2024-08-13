@@ -63,7 +63,7 @@ export default function UserDetail({
             {showLinks ? "HIDE" : "SHOW"} LINKS
           </Button>
           {showLinks && (
-            <Flex direction="column" gap={4}>
+            <Flex direction="column" gap={4} padding={2}>
               {user.Links.map((link, index) => (
                 <LinkDetail link={link} key={index} />
               ))}

@@ -11,10 +11,5 @@ export {
   deleteLink,
   useLink,
 } from "./link";
-export {
-  getAllUsers,
-  editUser,
-  getAllLinks,
-  modifyLink,
-  getAllReports,
-} from "./admin";
+export { getAllUsers, editUser, getAllLinks, modifyLink } from "./admin";
+export { reportLink } from "./report";

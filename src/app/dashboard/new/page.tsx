@@ -1,6 +1,7 @@
 "use client";
 
 import { createLink } from "@/actions";
+import { baseUrl } from "@/url";
 import {
   Button,
   Flex,
@@ -43,7 +44,7 @@ export default function NewLink() {
         >
           <FormControl isInvalid={Array.isArray(formState.shortCode)}>
             <InputGroup variant="flushed">
-              <InputLeftAddon>riskycase.in/</InputLeftAddon>
+              <InputLeftAddon>{baseUrl.hostname}/</InputLeftAddon>
               <Input name="shortCode" />
             </InputGroup>
             {Array.isArray(formState.shortCode) &&

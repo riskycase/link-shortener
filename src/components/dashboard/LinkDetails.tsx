@@ -14,6 +14,7 @@ import {
 import { deleteLink } from "@/actions";
 import { redirect } from "next/navigation";
 import NextLink from "next/link";
+import { baseUrl } from "@/url";
 
 export default function LinkDetails({
   link,
@@ -44,8 +45,10 @@ export default function LinkDetails({
         gap={2}
       >
         <Flex direction="column" gap={2}>
-          <Link as={NextLink} href={`https://riskycase.in/${link.shortCode}`}>
-            <Text fontSize="large">riskycase.in/{link.shortCode}</Text>
+          <Link as={NextLink} href={`${baseUrl.origin}/${link.shortCode}`}>
+            <Text fontSize="large">
+              {baseUrl.hostname}/{link.shortCode}
+            </Text>
             <Text wordBreak="break-all">{link.longLink}</Text>
           </Link>
           <Text>Clicks: {link.redirectCount}</Text>

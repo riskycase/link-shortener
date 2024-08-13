@@ -23,6 +23,11 @@ export async function getAllLinks() {
       User: true,
       Report: true,
     },
+    orderBy: {
+      Report: {
+        _count: "desc",
+      },
+    },
   });
 }
 
@@ -38,13 +43,5 @@ export async function modifyLink(
   return await db.link.update({
     where: { id: shortCode.toLowerCase() },
     data: { disabled, disabledMessage },
-  });
-}
-
-export async function getAllReports() {
-  return db.report.findMany({
-    include: {
-      Link: true,
-    },
   });
 }

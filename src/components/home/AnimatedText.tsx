@@ -4,6 +4,7 @@ import { Flex, Heading, Link, Text } from "@chakra-ui/react";
 import TextTransition, { presets } from "react-text-transition";
 import { useEffect, useState } from "react";
 import NextLink from "next/link";
+import { baseUrl } from "@/url";
 
 export default function AnimatedText() {
   const linkData = [
@@ -50,10 +51,10 @@ export default function AnimatedText() {
       <Text>to short links as</Text>
       <Link
         as={NextLink}
-        href={`https://riskycase.in/${linkData[index].shortCode}`}
+        href={`${baseUrl.origin}/${linkData[index].shortCode}`}
       >
         <Flex>
-          <Text>riskycase.in/</Text>
+          <Text>{baseUrl.hostname}/</Text>
           <TextTransition springConfig={presets.wobbly}>
             <Text as="span">{linkData[index].shortCode}</Text>
           </TextTransition>
