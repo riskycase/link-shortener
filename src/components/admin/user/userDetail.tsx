@@ -45,7 +45,7 @@ export default function UserDetail({
           <Text fontSize="large">{user.name}</Text>
           <Text fontSize="small">{user.email}</Text>
           <Text fontSize="small">
-            {user.Links.length} / {limit} links used
+            {user.Links.length} / {user.linkLimit} links used
           </Text>
         </Flex>
         <Button variant="text" onClick={openModal}>

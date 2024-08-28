@@ -1,6 +1,6 @@
 "use client";
 
-import { modifyLink } from "@/actions";
+import { deleteReports, modifyLink } from "@/actions";
 import { baseUrl } from "@/url";
 import {
   Alert,
@@ -85,7 +85,7 @@ export default function LinkDetail({
             </Flex>
           </Flex>
           <Button onClick={openModal}>
-            {isDisabled ? "Enable" : "Disable"}
+            {link.disabled ? "Enable" : "Disable"}
           </Button>
         </Flex>
         {link.Report.length > 0 && (
@@ -100,6 +100,13 @@ export default function LinkDetail({
                 onClick={() => setShowReports(!showReports)}
               >
                 {showReports ? "HIDE" : "SHOW"} REPORTS
+              </Button>
+              <Button
+                variant="text"
+                alignSelf="start"
+                onClick={() => deleteReports(link.shortCode)}
+              >
+                CLEAR REPORTS
               </Button>
               <Badge>{link.Report.length}</Badge>
             </Flex>
