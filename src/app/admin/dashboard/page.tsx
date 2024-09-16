@@ -20,29 +20,31 @@ export default async function AdminDashboard() {
     redirect("/");
   }
   const [users, links] = await Promise.all([getAllUsers(), getAllLinks()]);
-  return (
-    <Flex direction="column" padding={4} gap={4} flex={1}>
-      <Heading>Admin Dashboard</Heading>
-      <Tabs isFitted>
-        <TabList>
-          <Tab>
-            <Text marginX={2}>Users</Text>
-            <Badge>{users.length}</Badge>
-          </Tab>
-          <Tab>
-            <Text marginX={2}>Links</Text>
-            <Badge>{links.length}</Badge>
-          </Tab>
-        </TabList>
-        <TabPanels>
-          <TabPanel>
-            <UserList users={users} />
-          </TabPanel>
-          <TabPanel>
-            <LinkList links={links} />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
-    </Flex>
-  );
+  if (!(Array.isArray(users) && Array.isArray(links))) redirect("/");
+  else
+    return (
+      <Flex direction="column" padding={4} gap={4} flex={1}>
+        <Heading>Admin Dashboard</Heading>
+        <Tabs isFitted>
+          <TabList>
+            <Tab>
+              <Text marginX={2}>Users</Text>
+              <Badge>{users.length}</Badge>
+            </Tab>
+            <Tab>
+              <Text marginX={2}>Links</Text>
+              <Badge>{links.length}</Badge>
+            </Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <UserList users={users} />
+            </TabPanel>
+            <TabPanel>
+              <LinkList links={links} />
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </Flex>
+    );
 }
