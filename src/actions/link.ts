@@ -11,8 +11,8 @@ const shortLinkSchema = z.object({
   shortCode: z
     .string()
     .regex(
-      /^[a-zA-Z0-9]*$/,
-      "Message can only contain alphanumberic characters"
+      /^[a-zA-Z0-9-.]*$/,
+      "Message can only contain alphanumberic characters and special characters - and ."
     )
     .min(4, "Short code must be at least 4 characters long"),
   longLink: z.string().url("Must redirect to a valid URL"),
