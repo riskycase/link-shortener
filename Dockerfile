@@ -33,6 +33,8 @@ COPY . .
 
 RUN npx prisma generate
 
+RUN npm install prisma
+
 RUN \
     if [ -f yarn.lock ]; then yarn run build; \
     elif [ -f package-lock.json ]; then npm run build; \
@@ -62,6 +64,15 @@ RUN chown nextjs:nodejs .next
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/prisma ./
+
+# Custom server
+COPY --from=builder --chown=nextjs:nodejs /app/dist ./
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
+
+RUN mkdir util
+
+COPY --from=builder --chown=nextjs:nodejs /app/util ./
 
 USER nextjs
 
@@ -69,6 +80,8 @@ EXPOSE 3000
 
 ENV PORT=3000
 
+RUN chmod u+x start.sh
+
 # server.js is created by next build from the standalone output
 # https://nextjs.org/docs/pages/api-reference/next-config-js/output
-CMD HOSTNAME="0.0.0.0" node server.js
+CMD sh start.sh
